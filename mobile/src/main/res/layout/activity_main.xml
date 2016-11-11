@@ -8,10 +8,50 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="in.ishansa.grvector.MainActivity">
+    tools:context="in.ishansa.testwearapp.MainActivity"
+    android:gravity="center">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/sensorType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GameRotationVector"/>
+
+        <TextView
+            android:id="@+id/readingTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"/>
+
+        <TextView
+            android:id="@+id/xReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X - Value"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/yReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Y - Value"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/zReading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Z - Value"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+
+
 </RelativeLayout>

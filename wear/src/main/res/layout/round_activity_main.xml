@@ -3,14 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.ishansa.grvector.MainActivity"
+    tools:context="in.ishansa.testwearapp.MainActivity"
     tools:deviceIds="wear_round">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/x1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_round" />
+        android:text="x"/>
+    <TextView
+        android:id="@+id/y1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="y"
+        android:layout_below="@id/x1"
+        />
+    <TextView
+        android:id="@+id/z1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="z"
+        android:layout_below="@id/y1"/>
+
+    <android.support.wearable.view.CircularButton
+        android:visibility="gone"
+        android:id="@+id/cButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/z1"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
