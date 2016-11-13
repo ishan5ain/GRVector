@@ -8,4 +8,31 @@
     app:rectLayout="@layout/rect_activity_main"
     app:roundLayout="@layout/round_activity_main"
     tools:context="in.ishansa.grvector.MainActivity"
-    tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>
+    tools:deviceIds="wear">
+
+    <TextView
+        android:id="@+id/x1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="x"/>
+    <TextView
+        android:id="@+id/y1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="y"
+        android:layout_below="@id/x1"
+        />
+    <TextView
+        android:id="@+id/z1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="z"
+        android:layout_below="@id/y1"/>
+
+</android.support.wearable.view.WatchViewStub>

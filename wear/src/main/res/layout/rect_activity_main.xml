@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="in.ishansa.testwearapp.MainActivity"
+    tools:context="in.ishansa.grvector.MainActivity"
     tools:deviceIds="wear_square">
 
     <TextView

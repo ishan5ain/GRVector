@@ -16,9 +16,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     private SensorManager sensorManager;
     private Sensor gameRotationVectorSensor;
-    private TextView xValue;
-    private TextView yValue;
-    private TextView zValue;
+    private TextView xValue = null;
+    private TextView yValue = null;
+    private TextView zValue = null;
     private String TAG = "WEAR LOG :";
 
     @Override
@@ -30,8 +30,11 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 xValue = (TextView) stub.findViewById(R.id.x1);
+                xValue.setText("xxx");
                 yValue = (TextView) stub.findViewById(R.id.y1);
+                yValue.setText("yyy");
                 zValue = (TextView) stub.findViewById(R.id.z1);
+                zValue.setText("zzz");
             }
         });
 
@@ -75,9 +78,14 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     public void printData(float[] values) {
         Log.d(TAG, "printData: " + values[0]);
-        xValue.setText(String.valueOf(values[0]));
-        yValue.setText(String.valueOf(values[1]));
-        zValue.setText(String.valueOf(values[2]));
+        try {
+            xValue.setText(Float.toString(values[0]));
+            yValue.setText(Float.toString(values[1]));
+            zValue.setText(Float.toString(values[2]));
+        } catch (NullPointerException e){
+            Log.d(TAG, "printData: NULL POINTER EXCEPTION");
+        }
+
     }
 
     @Override
