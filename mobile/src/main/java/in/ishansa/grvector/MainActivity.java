@@ -1,10 +1,13 @@
 package in.ishansa.grvector;
 
+import android.opengl.GLSurfaceView;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -19,21 +22,34 @@ import com.google.android.gms.wearable.Wearable;
 
 public class MainActivity extends AppCompatActivity implements DataApi.DataListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
 private static final String TAG = "MainActivity";
-    private TextView xVal;
-    private TextView yVal;
-    private TextView zVal;
-    private TextView timestampReading;
+//    private TextView xVal;
+//    private TextView yVal;
+//    private TextView zVal;
+//    private TextView timestampReading;
     private GoogleApiClient mGoogleApiClient;
+    OpenGLRenderer renderer = new OpenGLRenderer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        xVal = (TextView) findViewById(R.id.xReading);
-        yVal = (TextView) findViewById(R.id.yReading);
-        zVal = (TextView) findViewById(R.id.zReading);
-        timestampReading = (TextView) findViewById(R.id.readingTimestamp);
+        // Code for OpenGL Surface View
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        GLSurfaceView surfaceView = new GLSurfaceView(this);
+        surfaceView.setRenderer(renderer);
+        setContentView(surfaceView);
+
+
+
+//        setContentView(R.layout.activity_main);
+
+//        xVal = (TextView) findViewById(R.id.xReading);
+//        yVal = (TextView) findViewById(R.id.yReading);
+//        zVal = (TextView) findViewById(R.id.zReading);
+//        timestampReading = (TextView) findViewById(R.id.readingTimestamp);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
@@ -100,14 +116,16 @@ private static final String TAG = "MainActivity";
     private void unpackSensorData(DataMap datamap){
         Log.d(TAG, "unpackSensorData: starting to unpack DataMap received on Handheld");
 
-        long timestamp = datamap.getLong("timestamp");
-        int accuracy = datamap.getInt("accuracy");
+//        long timestamp = datamap.getLong("timestamp");
+//        int accuracy = datamap.getInt("accuracy");
         float[] values = datamap.getFloatArray("values");
 
-        timestampReading.setText(Long.toString(timestamp));
-        xVal.setText(Float.toString(values[0]));
-        yVal.setText(Float.toString(values[1]));
-        zVal.setText(Float.toString(values[2]));
+//        timestampReading.setText(Long.toString(timestamp));
+//        xVal.setText(Float.toString(values[0]));
+//        yVal.setText(Float.toString(values[1]));
+//        zVal.setText(Float.toString(values[2]));
+
+        renderer.setXYZRot(values[0], values[1], values[2]);
     }
 
 }

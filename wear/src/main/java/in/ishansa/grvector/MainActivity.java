@@ -30,6 +30,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
     private TextView yValue = null;
     private TextView zValue = null;
     private GoogleApiClient mGoogleApiClient;
+    private int mLastAccuracy;
     private static final String TAG = "WearActivity";
 
     @Override
@@ -86,6 +87,10 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
         sendGameRotVector(sensorEvent.sensor.getType(), sensorEvent.accuracy, sensorEvent.timestamp, sensorEvent.values);
 //        Log.d(TAG, "onSensorChanged: X = " + sensorEvent.values[0]);
+
+        if (mLastAccuracy == SensorManager.SENSOR_STATUS_UNRELIABLE) {
+            return;
+        }
         try {
             xValue.setText(Float.toString(sensorEvent.values[0]));
             yValue.setText(Float.toString(sensorEvent.values[1]));
@@ -99,6 +104,9 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
+        if (mLastAccuracy != i) {
+            mLastAccuracy = i;
+        }
 
     }
 
