@@ -18,6 +18,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
     private float xRot;
     private float yRot;
     private float zRot;
+    private float mCubeRotation;
 
 
     @Override
@@ -69,7 +70,7 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
         gl10.glLoadIdentity();
 
-//        mCubeRotation -= 0.15f;
+//        mCubeRotation -= 0.50f;
 
     }
 

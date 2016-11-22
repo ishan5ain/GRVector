@@ -1,5 +1,6 @@
 package in.ishansa.grvector;
 
+import android.hardware.SensorManager;
 import android.opengl.GLSurfaceView;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,14 +21,16 @@ import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 
-public class MainActivity extends AppCompatActivity implements DataApi.DataListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks{
-private static final String TAG = "MainActivity";
-//    private TextView xVal;
+public class MainActivity extends AppCompatActivity implements DataApi.DataListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    private static final String TAG = "MainActivity";
+    private static final int FROM_RAD_TO_DEG = -57;
+//        private TextView xVal;
 //    private TextView yVal;
 //    private TextView zVal;
 //    private TextView timestampReading;
     private GoogleApiClient mGoogleApiClient;
     OpenGLRenderer renderer = new OpenGLRenderer();
+    SensorManager sensorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ private static final String TAG = "MainActivity";
         GLSurfaceView surfaceView = new GLSurfaceView(this);
         surfaceView.setRenderer(renderer);
         setContentView(surfaceView);
-
 
 
 //        setContentView(R.layout.activity_main);
@@ -99,11 +101,11 @@ private static final String TAG = "MainActivity";
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
         Log.d(TAG, "onDataChanged: initiated...");
-        for(DataEvent dataEvent : dataEventBuffer){
-            if(dataEvent.getType() == DataEvent.TYPE_CHANGED){
+        for (DataEvent dataEvent : dataEventBuffer) {
+            if (dataEvent.getType() == DataEvent.TYPE_CHANGED) {
                 Log.d(TAG, "onDataChanged: Data Item Changed");
                 DataItem dataItem = dataEvent.getDataItem();
-                if(dataItem.getUri().getPath().compareTo("/grVector")==0){
+                if (dataItem.getUri().getPath().compareTo("/grVector") == 0) {
                     Log.d(TAG, "onDataChanged: Path Matched");
                     DataMap mDataMap = DataMapItem.fromDataItem(dataItem).getDataMap();
                     unpackSensorData(mDataMap);
@@ -113,7 +115,7 @@ private static final String TAG = "MainActivity";
 
     }
 
-    private void unpackSensorData(DataMap datamap){
+    private void unpackSensorData(DataMap datamap) {
         Log.d(TAG, "unpackSensorData: starting to unpack DataMap received on Handheld");
 
 //        long timestamp = datamap.getLong("timestamp");
@@ -125,7 +127,15 @@ private static final String TAG = "MainActivity";
 //        yVal.setText(Float.toString(values[1]));
 //        zVal.setText(Float.toString(values[2]));
 
-        renderer.setXYZRot(values[0], values[1], values[2]);
+        float[] rotationMatrix = new float[9];
+        sensorManager.getRotationMatrixFromVector(rotationMatrix, values);
+        float[] orientationMatrix = new float[3];
+        sensorManager.getOrientation(rotationMatrix, orientationMatrix);
+        float azimuth = orientationMatrix[0] * FROM_RAD_TO_DEG;
+        float pitch = orientationMatrix[1] * FROM_RAD_TO_DEG;
+        float roll = orientationMatrix[2] * FROM_RAD_TO_DEG;
+
+        renderer.setXYZRot(pitch, roll, azimuth);
     }
 
 }
