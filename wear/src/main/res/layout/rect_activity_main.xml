@@ -12,25 +12,17 @@
         android:id="@+id/x1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="x"/>
     <TextView
         android:id="@+id/y1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/x1"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="y"
         />
     <TextView
         android:id="@+id/z1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/y1"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="z"/>
 
     <android.support.wearable.view.CircularButton
@@ -38,6 +30,5 @@
         android:id="@+id/cButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_below="@id/z1"
         android:layout_marginTop="8dp"/>
 </LinearLayout>
