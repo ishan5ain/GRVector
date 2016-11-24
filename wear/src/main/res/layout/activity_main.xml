@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:rectLayout="@layout/rect_activity_main"
     app:roundLayout="@layout/round_activity_main"
-    tools:context="in.ishansa.grvector.MainActivity"
+    tools:context="in.ishansa.grvector.WearActivity"
     tools:deviceIds="wear">
 
     <TextView

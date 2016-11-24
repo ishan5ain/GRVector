@@ -22,14 +22,16 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
-public class MainActivity extends WearableActivity implements SensorEventListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class WearActivity extends WearableActivity implements SensorEventListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private SensorManager sensorManager;
     private Sensor gameRotationVectorSensor;
     private TextView xValue = null;
     private TextView yValue = null;
     private TextView zValue = null;
+
     private GoogleApiClient mGoogleApiClient;
+
     private int mLastAccuracy;
     private static final String TAG = "WearActivity";
 
@@ -42,11 +44,8 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 xValue = (TextView) stub.findViewById(R.id.x1);
-                //xValue.setText("xxx");
                 yValue = (TextView) stub.findViewById(R.id.y1);
-                //yValue.setText("yyy");
                 zValue = (TextView) stub.findViewById(R.id.z1);
-                //zValue.setText("zzz");
             }
         });
 
@@ -84,9 +83,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-
         sendGameRotVector(sensorEvent.sensor.getType(), sensorEvent.accuracy, sensorEvent.timestamp, sensorEvent.values);
-//        Log.d(TAG, "onSensorChanged: X = " + sensorEvent.values[0]);
 
         if (mLastAccuracy == SensorManager.SENSOR_STATUS_UNRELIABLE) {
             return;
@@ -96,7 +93,7 @@ public class MainActivity extends WearableActivity implements SensorEventListene
             yValue.setText(Float.toString(sensorEvent.values[1]));
             zValue.setText(Float.toString(sensorEvent.values[2]));
         } catch (NullPointerException e) {
-            Log.d(TAG, "onSensorChanged: Null Poiner Exception in printing values on Wear.");
+            Log.d(TAG, "onSensorChanged: Null Pointer Exception in printing values on Wear.");
             e.printStackTrace();
         }
 
@@ -115,7 +112,6 @@ public class MainActivity extends WearableActivity implements SensorEventListene
         super.onStart();
         mGoogleApiClient.connect();
         Log.d(TAG, "onStart: mGoogleApiClient connected...");
-//        mTeleportClient.connect();
     }
 
     @Override
