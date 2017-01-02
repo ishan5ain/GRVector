@@ -17,4 +17,5 @@ Quaternions can be implemented instead of Euler Angles for evading the Gimbal Lo
 ----
 ####Tested on
 **Motorola 360** *paired with* **OnePlus 2**
+<br>
 Watch the [Demo](https://www.youtube.com/watch?v=tudOQyJk-qE).
